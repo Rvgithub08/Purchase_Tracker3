@@ -194,6 +194,10 @@ export default function App() {
               ? r.date
               : r.date.toISOString().slice(0, 10)
             : r.date,
+          // FIX Supabase timestamp format
+          created_at: r.created_at
+            ? new Date(r.created_at).toLocaleString()
+            : "",
         }));
         if (!cancelled) setPurchases(normalized);
       } catch (e) {
@@ -366,6 +370,7 @@ export default function App() {
     bharti: f.bharti ? Number(f.bharti) : null,
     bag_type: f.bagType || "",
     note: f.note || "",
+    created_at: new Date().toLocaleString(),
     created_at_ts: Date.now(),
   });
 
